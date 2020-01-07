@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="jspdf.min.js"></script>
+        <script src="jquery.min.js"></script>
+        <title>Intake Report Wizard</title>
+    </head>
+    <body>
+
+        <p><!-- Demographic Info -->
+            Child Name: <input id="Child_Name" type="name" value="&lt;Paitent Name&gt;">  DOB: <input id="DOB" type="date" max="9999-12-31">
+            <br>Gender: <select id="gender">
+                <option value = "boy">boy</option>
+                <option value = "girl">girl</option>
+            </select>
+            <br>School Year: <select id="school_year">
+                <optgroup label = "Kindergarten">
+                    <option value = "Kindergarten">Kindergarten</option>
+                </optgroup>
+                <optgroup label = "Elementry">
+                    <option value = "Elementry, 1st Grade">Elementry 1st</option>
+                    <option value = "Elementry, 2nd Grade">Elementry 2nd</option>
+                    <option value = "Elementry, 3rd Grade">Elementry 3rd</option>
+                    <option value = "Elementry, 4th Grade">Elementry 4th</option>
+                    <option value = "Elementry, 5th Grade">Elementry 5th</option>
+                    <option value = "Elementry, 6th Grade">Elementry 6th</option>
+                </optgroup>
+                <optgroup label = "Junior High">
+                    <option value = "Junior High, 7th Grade">Junior High 7th</option>
+                    <option value = "Junior High, 8th Grade">Junior High 8th</option>
+                </optgroup>
+                <optgroup label = "Senior High">
+                    <option value = "Senior High, 9th Grade">Senior High 9th</option>
+                    <option value = "Senior High, 10th Grade">Senior High 10th</option>
+                    <option value = "Senior High, 11th Grade">Senior High 11th</option>
+                    <option value = "Senior High, 12th Grade">Senior High 12th</option>
+                </optgroup>
+            </select>
+        </p>
+        <!-- section1: Reasons for Evaluation/Theraphy starts -->
+        <hr><p style='font-style: italic;font-weight: bold;text-align: center;'>Reasons for Evaluation/Theraphy</p><hr>
+        <p>
+            Who referred your child?: <input id="referral" type="name" value="&lt;Usually Parents Name&gt;"></textarea>
+        </p>
+        <p>
+            Please describe the problems, questions or concerns for which you are seeking help at this time. Also, please indicate when these problems were first noticed.
+        </p>
+        <p>
+            Description 1:<br><textarea id="disc1" rows="2" cols="100">(empty concern as a default)</textarea><br>At what age? <input id="p_age01" type="number" placeholder="age"> 
+        </p>
+        <p>
+            Description 2:<br><textarea id="disc2" rows="2" cols="100">(empty concern as a default)</textarea><br>At what age? <input id="p_age02" type="number" placeholder="age">
+        </p>
+        <p>
+            What do you think might be the reason for your child’s difficulties?<br><textarea id="diff_reason" rows="2" cols="100">Reasons goes here</textarea>
+        </p>
+        <!-- section1 ends -->
+        <button id="report">Make a Report</button>
+    </body>
+    <footer>
+        copyright &copy; by Elliot Byoungmo Koo All Rights Reserved
+    </footer>
+
+    <!--JAVASCRIPT SECTION STARTS-->
+    <script>
+        //AGE CALCULATOR STARTS
+        function calcAge(birth){
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = (date.getMonth()+1);
+            var day = date.getDate();
+            if(month < 10) month = '0' + month;
+            if(day < 10) day = '0' + day;
+            var monthDay = month + day;
+
+            birth = birth.replace('-','').replace('-','');
+            var birthdayy = birth.substr(0, 4);
+            var birthdaymd = birth.substr(4, 4);
+
+            var age = monthDay < birthdaymd ? year - birthdayy -1 : year - birthdayy;
+            return age;
+        }
+        //AGE CALCULATOR ENDS
+
+        //ON CLICK JAVASCRIPT
+        $(document).ready(function(){
+            //global vars for static use
+            var lMargin=25.4; //left margin in mm
+            var rMargin=25.4; //right margin in mm
+            var pdfInMM=215.9;  // width of A4 in mm
+            var tMargin=25.4; //top margin in mm
+            var bMargin=25.4; //bottom margin in mm
+            var pBreak=4.28*1.15; //line height in mm when font size is 12pt
+
+            //REPORT GENERATOR BUTTON
+            $("#report").click(function(){
+                //jQuery trimming section for doc.text use
+                var child_name = $.trim($("#Child_Name").val());
+                var dob = $.trim($('#DOB').val());
+                var doy = dob.substring(0,4);
+                var auto_date = new Date();
+                var age = calcAge(dob);
+                var school_year = $.trim($("#school_year").val());
+                var gender = $.trim($('#gender').val());
+                var disc1 = $.trim($("#disc1").val());
+                var disc2 = $.trim($("#disc2").val());
+                var referral = $.trim($("#referral").val());
+
+                //setting of jsPDF
+                var doc = new jsPDF("p", "mm", "a4");
+
+
+                //TODO: know how to use getLineHeightFactor();
+                //var pBreak = doc.getLineHeightFactor();
+                var cursor=0;//initialize cursor position
+
+                doc.setFont("Times New Roman");
+                doc.setFontSize(12);
+                
+                //generating the report
+                //Demographic info section
+                cursor += tMargin;
+                doc.text(lMargin, cursor, "Name:  " + child_name);
+                cursor += pBreak;
+                doc.text(lMargin, cursor, "Date of Birth: " + dob);
+                cursor += pBreak;
+                doc.text(lMargin, cursor, "Evaluator:  Dosheen Cook, Ph.D.");
+                cursor += pBreak;
+                doc.text(lMargin,cursor,"Date of Testing: " + auto_date.getFullYear() + "-" + (auto_date.getMonth()+1) + "-" + auto_date.getDate());
+                cursor += pBreak;
+                doc.text(lMargin, cursor, "School Year: " + school_year);
+
+                doc.setFontStyle("bold");
+                cursor += 3*pBreak;
+
+                //Reason Referral section
+                doc.text(lMargin, cursor, "REASON REFERRAL");
+                doc.setFontStyle("normal");
+                var referral_report_raw = child_name + " is a " + age + " years old " + gender + " who was referred by " + referral + " for " + disc1 + ". " + referral + " is(are) also " + disc2 + ".";
+                //wrap text
+                //TODO: AUTO ADDING PAGE according to if the wrapped text go over a page
+                var referral_report = doc.splitTextToSize(referral_report_raw, (pdfInMM-lMargin-rMargin));
+                var referral_report_lines = referral_report.length;
+                var referral_report_blockHeight = referral_report_lines * pBreak;
+                cursor += pBreak;
+                doc.text(lMargin, cursor, referral_report);
+                cursor += referral_report_blockHeight;
+
+                doc.save("file.pdf");
+            });
+
+        })
+    </script>
+</html>
