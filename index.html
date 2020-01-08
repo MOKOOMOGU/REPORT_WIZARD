@@ -63,6 +63,7 @@
 
     <!--JAVASCRIPT SECTION STARTS-->
     <script>
+        
         //AGE CALCULATOR STARTS
         function calcAge(birth){
             var date = new Date();
@@ -82,18 +83,22 @@
         }
         //AGE CALCULATOR ENDS
 
-        //ON CLICK JAVASCRIPT
+
         $(document).ready(function(){
+
             //global vars for static use
             var lMargin=25.4; //left margin in mm
             var rMargin=25.4; //right margin in mm
             var pdfInMM=215.9;  // width of A4 in mm
             var tMargin=25.4; //top margin in mm
             var bMargin=25.4; //bottom margin in mm
+            var marginGroup = new Array(lMargin, rMargin, tMargin, bMargin);
             var pBreak=4.28*1.15; //line height in mm when font size is 12pt
+            var cursor=0;//initialize cursor position
 
             //REPORT GENERATOR BUTTON
             $("#report").click(function(){
+
                 //jQuery trimming section for doc.text use
                 var child_name = $.trim($("#Child_Name").val());
                 var dob = $.trim($('#DOB').val());
@@ -112,7 +117,6 @@
 
                 //TODO: know how to use getLineHeightFactor();
                 //var pBreak = doc.getLineHeightFactor();
-                var cursor=0;//initialize cursor position
 
                 doc.setFont("Times New Roman");
                 doc.setFontSize(12);
@@ -121,6 +125,7 @@
                 //Demographic info section
                 cursor += tMargin;
                 doc.text(lMargin, cursor, "Name:  " + child_name);
+                doc.text(pdfInMM-rMargin, cursor+pBreak, ""+cursor);
                 cursor += pBreak;
                 doc.text(lMargin, cursor, "Date of Birth: " + dob);
                 cursor += pBreak;
@@ -142,9 +147,34 @@
                 var referral_report = doc.splitTextToSize(referral_report_raw, (pdfInMM-lMargin-rMargin));
                 var referral_report_lines = referral_report.length;
                 var referral_report_blockHeight = referral_report_lines * pBreak;
-                cursor += pBreak;
-                doc.text(lMargin, cursor, referral_report);
-                cursor += referral_report_blockHeight;
+                //Normal adding without checking overflow
+                //cursor += pBreak;
+                //AUTO ADDING PAGE TRY01
+                //Simple adding
+                /* if(referral_report_blockHeight >= doc.internal.pageSize.height){
+                    doc.addPage();
+                    cursor = 0;
+                    cursor += tMargin;
+                }else{
+                    cursor += pBreak;
+                } */
+                //Fail: only adding one time and flowing over in the 2nd page
+
+                //AUTO ADDING PAGE TRY02
+                //Since 'splitTextToSize' returns array object, print all lines through loop and every loop, check if the cursor goes over the
+                for(var i = 0; i < referral_report.length; i++){
+                    if((cursor+pBreak) >= (doc.internal.pageSize.height-bMargin)){
+                        doc.addPage();
+                        cursor = 0;
+                        cursor += tMargin;
+                    }else{
+                        cursor += pBreak;
+                    }
+                    doc.text(lMargin, cursor, referral_report[i]);
+                }
+                //TRY02 SUCCESS
+                //TODO: Make TRY02 as a function
+                //ALSO MADE 'printLine' with checking overflow
 
                 doc.save("file.pdf");
             });
