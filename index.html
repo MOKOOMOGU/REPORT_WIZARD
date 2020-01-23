@@ -8,7 +8,7 @@
     <body>
 
         <p><!-- Demographic Info -->
-            Child Name: <input id="Child_Name" type="name" value="&lt;Paitent Name&gt;">  DOB: <input id="DOB" type="date" max="9999-12-31">
+            Child Name: <input id="Child_Name" type="name" value="&lt;Paitent&gt;">  DOB: <input id="DOB" type="date" max="9999-12-31">
             <br>Gender: <select id="gender">
                 <option value = "boy">boy</option>
                 <option value = "girl">girl</option>
@@ -40,7 +40,7 @@
         <!-- section1: Reasons for Evaluation/Theraphy starts -->
         <hr><p style='font-style: italic;font-weight: bold;text-align: center;'>Reasons for Evaluation/Theraphy</p><hr>
         <p>
-            Who referred your child?: <input id="referral" type="name" value="&lt;Usually Parents Name&gt;"></textarea>
+            Who referred your child?: <input id="referral" type="name" value="&lt;Guardian&gt;"></textarea>
         </p>
         <p>
             Please describe the problems, questions or concerns for which you are seeking help at this time. Also, please indicate when these problems were first noticed.
@@ -55,6 +55,62 @@
             What do you think might be the reason for your child’s difficulties?<br><textarea id="diff_reason" rows="2" cols="100">Reasons goes here</textarea>
         </p>
         <!-- section1 ends -->
+        <!-- section2 Temperament/Child's Personality Character -->
+        <hr><p style='font-style: italic;font-weight: bold;text-align: center;'>Temperament/Child's Personality Character</p><hr>
+        <p> Plese indicate whether your child has shown any of the following behaviors. Explain, if possible</p>
+        <table>
+            <tr>
+                <td><input id="crying" type="checkbox" value="excessive crying, ">Excessive Crying</td>
+                <td><input id="inter_freq" type="checkbox" value="interrupts frequently, ">Interrupts frequently</td>
+            </tr>
+            <tr>
+                <td><input id="want_to_die" type="checkbox" value="talks about wanting to die, ">Talks about wanting to die</td>
+                <td><input id="peer_prob" type="checkbox" value="peer problems, ">Peer problems</td>
+            </tr>
+            <tr>
+                <td><input id="social_wthrw" type="checkbox" value="social withdrawal, ">Social withdrawal</td>
+                <td><input id="frq_tmpr" type="checkbox" value="frequent temper tantrums, ">Frequent temper tantrums</td>
+            </tr>
+            <tr>
+                <td><input id="destruct" type="checkbox" value="destructiveness, ">Destructiveness</td>
+                <td><input id="defiance" type="checkbox" value="defiance of authority, ">Defiance of authority</td>
+            </tr>
+            <tr>
+                <td><input id="ritualistic" type="checkbox" value="ritualistic behaviors, ">Ritualistic behaviors</td>
+                <td><input id="delinquent" type="checkbox" value="delinquent behaviors, ">Delinquent behaviors</td>
+            </tr>
+            <tr>
+                <td><input id="anx_nerv_wrr" type="checkbox" value="anxiety, nervousness, excessive worries, ">Anxiety, nervousness, excessive worries</td>
+                <td><input id="ngt_trr_slpwk" type="checkbox" value="nightmares, night terrors, sleep walking, talking in sleep, ">Nightmares, night terrors, sleep walking</td>
+            </tr>
+            <tr>
+                <td><input id="odd_thk" type="checkbox" value="odd thinking or speech, ">Odd thinking or speech</td>
+                <td>talking in sleep</td>
+            </tr>
+            <tr>
+                <td><input id="poor_att" type="checkbox" value="poor attention, ">Poor attention</td>
+                <td><input id="diff_slp" type="checkbox" value="difficulty falling or staying asleep, ">Difficulty falling or staying asleep</td>
+            </tr>
+            <tr>
+                <td><input id="fgts_sit" type="checkbox" value="fidgets / Can't sit still, ">Fidgets / Can't sit still</td>
+                <td><input id="iapp_sex" type="checkbox" value="inappropriate sexualized behaviors, ">Inappropriate sexualized behaviors</td>
+            </tr>
+        </table>
+        <p>Ohter Concerns:<br>
+            <textarea id="add_conc" rows="3" cols="100">(empty additional concerns as default)</textarea>
+        </p>
+        <p>
+            History of mental health treatment&nbsp;<input type="checkbox" id="hist_y">&nbsp;Yes&nbsp;<input type="checkbox" id="hist_n">No&nbsp;
+            Inpatient treatment?&nbsp;<input type="checkbox" id="inpat_y">&nbsp;Yes&nbsp;<input type="checkbox" id="inpat_n">No<br>
+            If yes, where and when?<br>
+            <textarea id="add_conc" rows="3" cols="100">(empty additional concerns as default)</textarea>
+        </p>
+        <p>
+            What was the treatment outcome?
+            <textarea id="trt_out" rows="2" cols="100">(empty treatment outcome as default)</textarea>
+        </p>
+        <!-- section2 ends -->
+        
         <button id="report">Make a Report</button>
     </body>
     <footer>
@@ -94,10 +150,10 @@
             var bMargin=25.4; //bottom margin in mm
             var marginGroup = new Array(lMargin, rMargin, tMargin, bMargin);
             var pBreak=4.28*1.15; //line height in mm when font size is 12pt
-            var cursor=0;//initialize cursor position
 
             //REPORT GENERATOR BUTTON
             $("#report").click(function(){
+                var cursor=0;//initialize cursor position
 
                 //jQuery trimming section for doc.text use
                 var child_name = $.trim($("#Child_Name").val());
@@ -110,6 +166,25 @@
                 var disc1 = $.trim($("#disc1").val());
                 var disc2 = $.trim($("#disc2").val());
                 var referral = $.trim($("#referral").val());
+                //Trimming for CheckBoxes
+                var crying = $("#crying").prop("checked") ? $("#crying").val() : "";
+                var want_to_die = $("#want_to_die").prop("checked") ? $("#want_to_die").val() : "";
+                var inter_freq = $("#inter_freq").prop("checked") ? $("#inter_freq").val() : "";
+                var peer_prob = $("#peer_prob").prop("checked") ? $("#peer_prob").val() : "";
+                var social_wthrw = $("#social_wthrw").prop("checked") ? $("#social_wthrw").val() : "";
+                var frq_tmpr = $("#frq_tmpr").prop("checked") ? $("#frq_tmpr").val() : "";
+                var destruct = $("#destruct").prop("checked") ? $("#desturct").val() : "";
+                var defiance = $("#defiance").prop("checked") ? $("#defiance").val() : "";
+                var ritualistic = $("#ritualistic").prop("checked") ? $("#ritualistic").val() : "";
+                var delinquent = $("#delinquent").prop("checked") ? $("#delinquent").val() : "";
+                var anx_nerv_wrr = $("#anx_nerv_wrr").prop("checked") ? $("#anx_nerv_wrr").val() : "";
+                var ngt_trr_slpwk = $("#ngt_trr_slpwk").prop("checked") ? $("#ngt_trr_slpwk").val() : "";
+                var odd_thk = $("#odd_thk").prop("checked") ? $("#odd_thk").val() : "";
+                var poor_att = $("#poor_att").prop("checked") ? $("#poor_att").val() : "";
+                var fgts_sit = $("#fgts_sit").prop("checked") ? $("#fgts_sit").val() : "";
+                var iapp_sex = $("#iapp_sex").prop("checked") ? $("#iapp_sex").val() : "";
+                //Charcter Checkboxes ends
+                var add_conc = $.trim($("#add_conc").val());
 
                 //setting of jsPDF
                 var doc = new jsPDF("p", "mm", "a4");
@@ -145,8 +220,8 @@
                 //wrap text
                 //TODO: AUTO ADDING PAGE according to if the wrapped text go over a page
                 var referral_report = doc.splitTextToSize(referral_report_raw, (pdfInMM-lMargin-rMargin));
-                var referral_report_lines = referral_report.length;
-                var referral_report_blockHeight = referral_report_lines * pBreak;
+                /* var referral_report_lines = referral_report.length;
+                var referral_report_blockHeight = referral_report_lines * pBreak; */
                 //Normal adding without checking overflow
                 //cursor += pBreak;
                 //AUTO ADDING PAGE TRY01
@@ -174,9 +249,34 @@
                 }
                 //TRY02 SUCCESS
                 //TODO: Make TRY02 as a function
-                //ALSO MADE 'printLine' with checking overflow
+                //ALSO MAKE 'printLine' with checking overflow
 
-                doc.save("file.pdf");
+                //SECTION2: PRESENTING PROBLEMS
+                if((cursor+(3*pBreak)) >= (doc.internal.pageSize.height-bMargin)){
+                    doc.addPage();
+                    cursor = 0;
+                    cursor += tMargin;
+                }else{
+                    cursor += 3*pBreak;
+                }
+                doc.setFontStyle("bold");
+                doc.text(lMargin, cursor, "PRESENTING PROBLEMS");
+                doc.setFontStyle("normal");
+                var presenting_problems_raw = referral + " is expressing increased concern about " + child_name + "'s " + crying + want_to_die + inter_freq + peer_prob + social_wthrw + frq_tmpr + destruct + defiance + ritualistic + delinquent + anx_nerv_wrr + ngt_trr_slpwk + odd_thk + poor_att + fgts_sit + iapp_sex + ". " + referral + " is also concerned with " + child_name + "'s " + add_conc + ".";
+                var presenting_problems = doc.splitTextToSize(presenting_problems_raw, (pdfInMM-lMargin-rMargin));
+                for(var i = 0; i < presenting_problems.length; i++){
+                    if((cursor+pBreak) >= (doc.internal.pageSize.height-bMargin)){
+                        doc.addPage();
+                        cursor = 0;
+                        cursor += tMargin;
+                    }else{
+                        cursor += pBreak;
+                    }
+                    doc.text(lMargin, cursor, presenting_problems[i]);
+                }
+                //SECTION2 ENDS
+                
+                doc.save(child_name+"Intake Report.pdf");
             });
 
         })
