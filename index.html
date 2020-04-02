@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="jspdf.min.js"></script>
-        <script src="jquery.min.js"></script>
-        <title>Intake Report Wizard</title>
-    </head>
-    <body>
 
-        <p><!-- Demographic Info -->
-            Child Name: <input id="Child_Name" type="name" value="&lt;Paitent&gt;">  DOB: <input id="DOB" type="date" max="9999-12-31">
-            <br>Gender: <select id="gender">
+<head>
+    <script src="jspdf.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <title>Intake Report Wizard</title>
+</head>
+
+<body>
+
+    <p>
+        <!-- Demographic Info -->
+        Child Name: <input id="Child_Name" type="name" value="&lt;Paitent&gt;"> DOB: <input id="DOB" type="date" max="9999-12-31">
+        <br>Gender: <select id="gender">
                 <option value = "boy">boy</option>
                 <option value = "girl">girl</option>
             </select>
-            <br>School Year: <select id="school_year">
+        <br>School Year: <select id="school_year">
                 <optgroup label = "Kindergarten">
                     <option value = "Kindergarten">Kindergarten</option>
                 </optgroup>
@@ -36,248 +39,321 @@
                     <option value = "Senior High, 12th Grade">Senior High 12th</option>
                 </optgroup>
             </select>
-        </p>
-        <!-- section1: Reasons for Evaluation/Theraphy starts -->
-        <hr><p style='font-style: italic;font-weight: bold;text-align: center;'>Reasons for Evaluation/Theraphy</p><hr>
-        <p>
-            Who referred your child?: <input id="referral" type="name" value="&lt;Guardian&gt;"></textarea>
-        </p>
-        <p>
-            Please describe the problems, questions or concerns for which you are seeking help at this time. Also, please indicate when these problems were first noticed.
-        </p>
-        <p>
-            Description 1:<br><textarea id="disc1" rows="2" cols="100">(empty concern as a default)</textarea><br>At what age? <input id="p_age01" type="number" placeholder="age"> 
-        </p>
-        <p>
-            Description 2:<br><textarea id="disc2" rows="2" cols="100">(empty concern as a default)</textarea><br>At what age? <input id="p_age02" type="number" placeholder="age">
-        </p>
-        <p>
-            What do you think might be the reason for your child’s difficulties?<br><textarea id="diff_reason" rows="2" cols="100">Reasons goes here</textarea>
-        </p>
-        <!-- section1 ends -->
-        <!-- section2 Temperament/Child's Personality Character -->
-        <hr><p style='font-style: italic;font-weight: bold;text-align: center;'>Temperament/Child's Personality Character</p><hr>
-        <p> Plese indicate whether your child has shown any of the following behaviors. Explain, if possible</p>
-        <table>
-            <tr>
-                <td><input id="crying" type="checkbox" value="excessive crying, ">Excessive Crying</td>
-                <td><input id="inter_freq" type="checkbox" value="interrupts frequently, ">Interrupts frequently</td>
-            </tr>
-            <tr>
-                <td><input id="want_to_die" type="checkbox" value="talks about wanting to die, ">Talks about wanting to die</td>
-                <td><input id="peer_prob" type="checkbox" value="peer problems, ">Peer problems</td>
-            </tr>
-            <tr>
-                <td><input id="social_wthrw" type="checkbox" value="social withdrawal, ">Social withdrawal</td>
-                <td><input id="frq_tmpr" type="checkbox" value="frequent temper tantrums, ">Frequent temper tantrums</td>
-            </tr>
-            <tr>
-                <td><input id="destruct" type="checkbox" value="destructiveness, ">Destructiveness</td>
-                <td><input id="defiance" type="checkbox" value="defiance of authority, ">Defiance of authority</td>
-            </tr>
-            <tr>
-                <td><input id="ritualistic" type="checkbox" value="ritualistic behaviors, ">Ritualistic behaviors</td>
-                <td><input id="delinquent" type="checkbox" value="delinquent behaviors, ">Delinquent behaviors</td>
-            </tr>
-            <tr>
-                <td><input id="anx_nerv_wrr" type="checkbox" value="anxiety, nervousness, excessive worries, ">Anxiety, nervousness, excessive worries</td>
-                <td><input id="ngt_trr_slpwk" type="checkbox" value="nightmares, night terrors, sleep walking, talking in sleep, ">Nightmares, night terrors, sleep walking</td>
-            </tr>
-            <tr>
-                <td><input id="odd_thk" type="checkbox" value="odd thinking or speech, ">Odd thinking or speech</td>
-                <td>talking in sleep</td>
-            </tr>
-            <tr>
-                <td><input id="poor_att" type="checkbox" value="poor attention, ">Poor attention</td>
-                <td><input id="diff_slp" type="checkbox" value="difficulty falling or staying asleep, ">Difficulty falling or staying asleep</td>
-            </tr>
-            <tr>
-                <td><input id="fgts_sit" type="checkbox" value="fidgets / Can't sit still, ">Fidgets / Can't sit still</td>
-                <td><input id="iapp_sex" type="checkbox" value="inappropriate sexualized behaviors, ">Inappropriate sexualized behaviors</td>
-            </tr>
-        </table>
-        <p>Ohter Concerns:<br>
-            <textarea id="add_conc" rows="3" cols="100">(empty additional concerns as default)</textarea>
-        </p>
-        <p>
-            History of mental health treatment&nbsp;<input type="checkbox" id="hist_y">&nbsp;Yes&nbsp;<input type="checkbox" id="hist_n">No&nbsp;
-            Inpatient treatment?&nbsp;<input type="checkbox" id="inpat_y">&nbsp;Yes&nbsp;<input type="checkbox" id="inpat_n">No<br>
-            If yes, where and when?<br>
-            <textarea id="add_conc" rows="3" cols="100">(empty additional concerns as default)</textarea>
-        </p>
-        <p>
-            What was the treatment outcome?
-            <textarea id="trt_out" rows="2" cols="100">(empty treatment outcome as default)</textarea>
-        </p>
-        <!-- section2 ends -->
-        
-        <button id="report">Make a Report</button>
-    </body>
-    <footer>
-        copyright &copy; by Elliot Byoungmo Koo All Rights Reserved
-    </footer>
+    </p>
+    <!-- section1: Reasons for Evaluation/Theraphy starts -->
+    <hr>
+    <p style='font-style: italic;font-weight: bold;text-align: center;'>Reasons for Evaluation/Theraphy</p>
+    <hr>
+    <p>
+        Who referred your child?: <input id="referral" type="name" value="&lt;Guardian&gt;"></textarea>
+    </p>
+    <p>
+        Please describe the problems, questions or concerns for which you are seeking help at this time. Also, please indicate when these problems were first noticed.
+    </p>
+    <p>
+        Description 1:<br><textarea id="disc1" rows="2" cols="100">(empty concern as a default)</textarea><br>At what age? <input id="p_age01" type="number" placeholder="age">
+    </p>
+    <p>
+        Description 2:<br><textarea id="disc2" rows="2" cols="100">(empty concern as a default)</textarea><br>At what age? <input id="p_age02" type="number" placeholder="age">
+    </p>
+    <p>
+        What do you think might be the reason for your child’s difficulties?<br><textarea id="diff_reason" rows="2" cols="100">Reasons goes here</textarea>
+    </p>
+    <!-- section1 ends -->
+    <!-- section2 Temperament/Child's Personality Character -->
+    <hr>
+    <p style='font-style: italic;font-weight: bold;text-align: center;'>Temperament/Child's Personality Character</p>
+    <hr>
+    <p> Plese indicate whether your child has shown any of the following behaviors. Explain, if possible</p>
+    <table>
+        <tr>
+            <td><input id="crying" type="checkbox" value="excessive crying, ">Excessive Crying</td>
+            <td><input id="inter_freq" type="checkbox" value="interrupts frequently, ">Interrupts frequently</td>
+        </tr>
+        <tr>
+            <td><input id="want_to_die" type="checkbox" value="talks about wanting to die, ">Talks about wanting to die</td>
+            <td><input id="peer_prob" type="checkbox" value="peer problems, ">Peer problems</td>
+        </tr>
+        <tr>
+            <td><input id="social_wthrw" type="checkbox" value="social withdrawal, ">Social withdrawal</td>
+            <td><input id="frq_tmpr" type="checkbox" value="frequent temper tantrums, ">Frequent temper tantrums</td>
+        </tr>
+        <tr>
+            <td><input id="destruct" type="checkbox" value="destructiveness, ">Destructiveness</td>
+            <td><input id="defiance" type="checkbox" value="defiance of authority, ">Defiance of authority</td>
+        </tr>
+        <tr>
+            <td><input id="ritualistic" type="checkbox" value="ritualistic behaviors, ">Ritualistic behaviors</td>
+            <td><input id="delinquent" type="checkbox" value="delinquent behaviors, ">Delinquent behaviors</td>
+        </tr>
+        <tr>
+            <td><input id="anx_nerv_wrr" type="checkbox" value="anxiety, nervousness, excessive worries, ">Anxiety, nervousness, excessive worries</td>
+            <td><input id="ngt_trr_slpwk" type="checkbox" value="nightmares, night terrors, sleep walking, talking in sleep, ">Nightmares, night terrors, sleep walking</td>
+        </tr>
+        <tr>
+            <td><input id="odd_thk" type="checkbox" value="odd thinking or speech, ">Odd thinking or speech</td>
+            <td>talking in sleep</td>
+        </tr>
+        <tr>
+            <td><input id="poor_att" type="checkbox" value="poor attention, ">Poor attention</td>
+            <td><input id="diff_slp" type="checkbox" value="difficulty falling or staying asleep, ">Difficulty falling or staying asleep</td>
+        </tr>
+        <tr>
+            <td><input id="fgts_sit" type="checkbox" value="fidgets / Can't sit still, ">Fidgets / Can't sit still</td>
+            <td><input id="iapp_sex" type="checkbox" value="inappropriate sexualized behaviors, ">Inappropriate sexualized behaviors</td>
+        </tr>
+    </table>
+    <p>Ohter Concerns:<br>
+        <textarea id="add_conc" rows="3" cols="100">(empty additional concerns as default)</textarea>
+    </p>
+    <p>
+        History of mental health treatment&nbsp;<input type="checkbox" id="hist_y">&nbsp;Yes&nbsp;<input type="checkbox" id="hist_n">No&nbsp; Inpatient treatment?&nbsp;<input type="checkbox" id="inpat_y">&nbsp;Yes&nbsp;<input type="checkbox" id="inpat_n">No<br>        If yes, where and when?<br>
+        <textarea id="add_conc" rows="3" cols="100">(empty additional concerns as default)</textarea>
+    </p>
+    <p>
+        What was the treatment outcome?
+        <textarea id="trt_out" rows="2" cols="100">(empty treatment outcome as default)</textarea>
+    </p>
+    <!-- section2 ends -->
+    <!-- section3 SOCIAL HISTORY starts -->
+    <hr>
+    <p style='font-style: italic;font-weight: bold;text-align: center;'>Social History</p>
+    <hr>
+    <table name="mo_fa">
+        <tr>
+            <td>Mother's name: </td>
+            <td><input type="text" id="mo_name"></td>
+            <td>Age: </td>
+            <td><input type="number" id="mo_age"></td>
+        </tr>
+        <tr>
+            <td>Occupation: </td>
+            <td><input type="text" id="mo_occ"></td>
+            <td>Marital Status: </td>
+            <td><input type="text" id="mo_mstat"></td>
+        </tr>
+        <tr>
+            <td>Check with applies: </td>
+            <td colspan="3">
+                <input type="checkbox" id="mo_bio" value="Biological">Biological/birth
+                <input type="checkbox" id="mo_adop" value="Adoptive">Adoptive
+                <input type="checkbox" id="mo_step" value="Step">Step
+                <input type="checkbox" id="mo_fos" value="Foster">Foster
+                <input type="checkbox" id="mo_other">Other <input type="text" id="m_other_t">
+            </td>
+        </tr>
+        <tr>
+            <td>Father's name: </td>
+            <td><input type="text" id="fa_name"></td>
+            <td>Age: </td>
+            <td><input type="number" id="fa_age"></td>
+        </tr>
+        <tr>
+            <td>Occupation: </td>
+            <td><input type="text" id="fa_occ"></td>
+            <td>Marital Status: </td>
+            <td><input type="text" id="fa_mstat"></td>
+        </tr>
+        <tr>
+            <td>Check with applies: </td>
+            <td colspan="3">
+                <input type="checkbox" id="fa_bio" value="Biological">Biological/birth
+                <input type="checkbox" id="fa_adop" value="Adoptive">Adoptive
+                <input type="checkbox" id="fa_step" value="Step">Step
+                <input type="checkbox" id="fa_fos" value="Foster">Foster
+                <input type="checkbox" id="fa_other">Other <input type="text" id="m_other_t">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">If parents are separated or divorced, who has custody of this child?</td>
+            <td><input type="text" id="cu_chi"></td>
+        </tr>
+        <tr>
+            <td colspan="4">How often does the other parent see this child?(check one)</td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="see_often" id="ew_mo" value="Weekly or more often">Weekly or more often</td>
+            <td><input type="radio" name="see_often" id="1_2m" value="Once or twice a month">Once or twice a month</td>
+            <td><input type="radio" name="see_often" id="few_yr" value="Few times a year">Few times a year</td>
+            <td><input type="radio" name="see_often" id="nvr" value="Never">Never</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                How long have the parents been separated?
+            </td>
+            <td colspan="2">
+                <input type="text" id="sep_per">
+            </td>
+        </tr>
+    </table>
+    <!-- section3 ends -->
+    <button id="report">Make a Report</button>
+</body>
+<footer>
+    copyright &copy; by Elliot Byoungmo Koo All Rights Reserved
+</footer>
 
-    <!--JAVASCRIPT SECTION STARTS-->
-    <script>
-        
-        //AGE CALCULATOR STARTS
-        function calcAge(birth){
-            var date = new Date();
-            var year = date.getFullYear();
-            var month = (date.getMonth()+1);
-            var day = date.getDate();
-            if(month < 10) month = '0' + month;
-            if(day < 10) day = '0' + day;
-            var monthDay = month + day;
+<!--JAVASCRIPT SECTION STARTS-->
+<script>
+    //AGE CALCULATOR STARTS
+    function calcAge(birth) {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = (date.getMonth() + 1);
+        var day = date.getDate();
+        if (month < 10) month = '0' + month;
+        if (day < 10) day = '0' + day;
+        var monthDay = month + day;
 
-            birth = birth.replace('-','').replace('-','');
-            var birthdayy = birth.substr(0, 4);
-            var birthdaymd = birth.substr(4, 4);
+        birth = birth.replace('-', '').replace('-', '');
+        var birthdayy = birth.substr(0, 4);
+        var birthdaymd = birth.substr(4, 4);
 
-            var age = monthDay < birthdaymd ? year - birthdayy -1 : year - birthdayy;
-            return age;
-        }
-        //AGE CALCULATOR ENDS
-
-
-        $(document).ready(function(){
-
-            //global vars for static use
-            var lMargin=25.4; //left margin in mm
-            var rMargin=25.4; //right margin in mm
-            var pdfInMM=215.9;  // width of A4 in mm
-            var tMargin=25.4; //top margin in mm
-            var bMargin=25.4; //bottom margin in mm
-            var marginGroup = new Array(lMargin, rMargin, tMargin, bMargin);
-            var pBreak=4.28*1.15; //line height in mm when font size is 12pt
-
-            //REPORT GENERATOR BUTTON
-            $("#report").click(function(){
-                var cursor=0;//initialize cursor position
-
-                //jQuery trimming section for doc.text use
-                var child_name = $.trim($("#Child_Name").val());
-                var dob = $.trim($('#DOB').val());
-                var doy = dob.substring(0,4);
-                var auto_date = new Date();
-                var age = calcAge(dob);
-                var school_year = $.trim($("#school_year").val());
-                var gender = $.trim($('#gender').val());
-                var disc1 = $.trim($("#disc1").val());
-                var disc2 = $.trim($("#disc2").val());
-                var referral = $.trim($("#referral").val());
-                //Trimming for CheckBoxes
-                var crying = $("#crying").prop("checked") ? $("#crying").val() : "";
-                var want_to_die = $("#want_to_die").prop("checked") ? $("#want_to_die").val() : "";
-                var inter_freq = $("#inter_freq").prop("checked") ? $("#inter_freq").val() : "";
-                var peer_prob = $("#peer_prob").prop("checked") ? $("#peer_prob").val() : "";
-                var social_wthrw = $("#social_wthrw").prop("checked") ? $("#social_wthrw").val() : "";
-                var frq_tmpr = $("#frq_tmpr").prop("checked") ? $("#frq_tmpr").val() : "";
-                var destruct = $("#destruct").prop("checked") ? $("#desturct").val() : "";
-                var defiance = $("#defiance").prop("checked") ? $("#defiance").val() : "";
-                var ritualistic = $("#ritualistic").prop("checked") ? $("#ritualistic").val() : "";
-                var delinquent = $("#delinquent").prop("checked") ? $("#delinquent").val() : "";
-                var anx_nerv_wrr = $("#anx_nerv_wrr").prop("checked") ? $("#anx_nerv_wrr").val() : "";
-                var ngt_trr_slpwk = $("#ngt_trr_slpwk").prop("checked") ? $("#ngt_trr_slpwk").val() : "";
-                var odd_thk = $("#odd_thk").prop("checked") ? $("#odd_thk").val() : "";
-                var poor_att = $("#poor_att").prop("checked") ? $("#poor_att").val() : "";
-                var fgts_sit = $("#fgts_sit").prop("checked") ? $("#fgts_sit").val() : "";
-                var iapp_sex = $("#iapp_sex").prop("checked") ? $("#iapp_sex").val() : "";
-                //Charcter Checkboxes ends
-                var add_conc = $.trim($("#add_conc").val());
-
-                //setting of jsPDF
-                var doc = new jsPDF("p", "mm", "a4");
+        var age = monthDay < birthdaymd ? year - birthdayy - 1 : year - birthdayy;
+        return age;
+    }
+    //AGE CALCULATOR ENDS
 
 
-                //TODO: know how to use getLineHeightFactor();
-                //var pBreak = doc.getLineHeightFactor();
+    $(document).ready(function() {
 
-                doc.setFont("Times New Roman");
-                doc.setFontSize(12);
-                
-                //generating the report
-                //Demographic info section
+        //global vars for static use
+        var lMargin = 25.4; //left margin in mm
+        var rMargin = 25.4; //right margin in mm
+        var pdfInMM = 215.9; // width of A4 in mm
+        var tMargin = 25.4; //top margin in mm
+        var bMargin = 25.4; //bottom margin in mm
+        var marginGroup = new Array(lMargin, rMargin, tMargin, bMargin);
+        var pBreak = 4.28 * 1.15; //line height in mm when font size is 12pt
+
+        //REPORT GENERATOR BUTTON
+        $("#report").click(function() {
+            var cursor = 0; //initialize cursor position
+
+            //jQuery trimming section for doc.text use
+            var child_name = $.trim($("#Child_Name").val());
+            var dob = $.trim($('#DOB').val());
+            var doy = dob.substring(0, 4);
+            var auto_date = new Date();
+            var age = calcAge(dob);
+            var school_year = $.trim($("#school_year").val());
+            var gender = $.trim($('#gender').val());
+            var disc1 = $.trim($("#disc1").val());
+            var disc2 = $.trim($("#disc2").val());
+            var referral = $.trim($("#referral").val());
+            //Trimming for CheckBoxes
+            var crying = $("#crying").prop("checked") ? $("#crying").val() : "";
+            var want_to_die = $("#want_to_die").prop("checked") ? $("#want_to_die").val() : "";
+            var inter_freq = $("#inter_freq").prop("checked") ? $("#inter_freq").val() : "";
+            var peer_prob = $("#peer_prob").prop("checked") ? $("#peer_prob").val() : "";
+            var social_wthrw = $("#social_wthrw").prop("checked") ? $("#social_wthrw").val() : "";
+            var frq_tmpr = $("#frq_tmpr").prop("checked") ? $("#frq_tmpr").val() : "";
+            var destruct = $("#destruct").prop("checked") ? $("#desturct").val() : "";
+            var defiance = $("#defiance").prop("checked") ? $("#defiance").val() : "";
+            var ritualistic = $("#ritualistic").prop("checked") ? $("#ritualistic").val() : "";
+            var delinquent = $("#delinquent").prop("checked") ? $("#delinquent").val() : "";
+            var anx_nerv_wrr = $("#anx_nerv_wrr").prop("checked") ? $("#anx_nerv_wrr").val() : "";
+            var ngt_trr_slpwk = $("#ngt_trr_slpwk").prop("checked") ? $("#ngt_trr_slpwk").val() : "";
+            var odd_thk = $("#odd_thk").prop("checked") ? $("#odd_thk").val() : "";
+            var poor_att = $("#poor_att").prop("checked") ? $("#poor_att").val() : "";
+            var fgts_sit = $("#fgts_sit").prop("checked") ? $("#fgts_sit").val() : "";
+            var iapp_sex = $("#iapp_sex").prop("checked") ? $("#iapp_sex").val() : "";
+            //Charcter Checkboxes ends
+            var add_conc = $.trim($("#add_conc").val());
+
+            //setting of jsPDF
+            var doc = new jsPDF("p", "mm", "a4");
+
+
+            //TODO: know how to use getLineHeightFactor();
+            //var pBreak = doc.getLineHeightFactor();
+
+            doc.setFont("Times New Roman");
+            doc.setFontSize(12);
+
+            //generating the report
+            //Demographic info section
+            cursor += tMargin;
+            doc.text(lMargin, cursor, "Name:  " + child_name);
+            cursor += pBreak;
+            doc.text(lMargin, cursor, "Date of Birth: " + dob);
+            cursor += pBreak;
+            doc.text(lMargin, cursor, "Evaluator:  Dosheen Cook, Ph.D.");
+            cursor += pBreak;
+            doc.text(lMargin, cursor, "Date of Testing: " + auto_date.getFullYear() + "-" + (auto_date.getMonth() + 1) + "-" + auto_date.getDate());
+            cursor += pBreak;
+            doc.text(lMargin, cursor, "School Year: " + school_year);
+
+            doc.setFontStyle("bold");
+            cursor += 3 * pBreak;
+
+            //Reason Referral section
+            doc.text(lMargin, cursor, "REASON REFERRAL");
+            doc.setFontStyle("normal");
+            var referral_report_raw = child_name + " is a " + age + " years old " + gender + " who was referred by " + referral + " for " + disc1 + ". " + referral + " is(are) also " + disc2 + ".";
+            //wrap text
+            //TODO: AUTO ADDING PAGE according to if the wrapped text go over a page
+            var referral_report = doc.splitTextToSize(referral_report_raw, (pdfInMM - lMargin - rMargin));
+            /* var referral_report_lines = referral_report.length;
+            var referral_report_blockHeight = referral_report_lines * pBreak; */
+            //Normal adding without checking overflow
+            //cursor += pBreak;
+            //AUTO ADDING PAGE TRY01
+            //Simple adding
+            /* if(referral_report_blockHeight >= doc.internal.pageSize.height){
+                doc.addPage();
+                cursor = 0;
                 cursor += tMargin;
-                doc.text(lMargin, cursor, "Name:  " + child_name);
+            }else{
                 cursor += pBreak;
-                doc.text(lMargin, cursor, "Date of Birth: " + dob);
-                cursor += pBreak;
-                doc.text(lMargin, cursor, "Evaluator:  Dosheen Cook, Ph.D.");
-                cursor += pBreak;
-                doc.text(lMargin,cursor,"Date of Testing: " + auto_date.getFullYear() + "-" + (auto_date.getMonth()+1) + "-" + auto_date.getDate());
-                cursor += pBreak;
-                doc.text(lMargin, cursor, "School Year: " + school_year);
+            } */
+            //Fail: only adding one time and flowing over in the 2nd page
 
-                doc.setFontStyle("bold");
-                cursor += 3*pBreak;
-
-                //Reason Referral section
-                doc.text(lMargin, cursor, "REASON REFERRAL");
-                doc.setFontStyle("normal");
-                var referral_report_raw = child_name + " is a " + age + " years old " + gender + " who was referred by " + referral + " for " + disc1 + ". " + referral + " is(are) also " + disc2 + ".";
-                //wrap text
-                //TODO: AUTO ADDING PAGE according to if the wrapped text go over a page
-                var referral_report = doc.splitTextToSize(referral_report_raw, (pdfInMM-lMargin-rMargin));
-                /* var referral_report_lines = referral_report.length;
-                var referral_report_blockHeight = referral_report_lines * pBreak; */
-                //Normal adding without checking overflow
-                //cursor += pBreak;
-                //AUTO ADDING PAGE TRY01
-                //Simple adding
-                /* if(referral_report_blockHeight >= doc.internal.pageSize.height){
+            //AUTO ADDING PAGE TRY02
+            //Since 'splitTextToSize' returns array object, print all lines through loop and every loop, check if the cursor goes over page height
+            for (var i = 0; i < referral_report.length; i++) {
+                if ((cursor + pBreak) >= (doc.internal.pageSize.height - bMargin)) {
                     doc.addPage();
                     cursor = 0;
                     cursor += tMargin;
-                }else{
+                } else {
                     cursor += pBreak;
-                } */
-                //Fail: only adding one time and flowing over in the 2nd page
-
-                //AUTO ADDING PAGE TRY02
-                //Since 'splitTextToSize' returns array object, print all lines through loop and every loop, check if the cursor goes over the
-                for(var i = 0; i < referral_report.length; i++){
-                    if((cursor+pBreak) >= (doc.internal.pageSize.height-bMargin)){
-                        doc.addPage();
-                        cursor = 0;
-                        cursor += tMargin;
-                    }else{
-                        cursor += pBreak;
-                    }
-                    doc.text(lMargin, cursor, referral_report[i]);
                 }
-                //TRY02 SUCCESS
-                //TODO: Make TRY02 as a function
-                //ALSO MAKE 'printLine' with checking overflow
+                doc.text(lMargin, cursor, referral_report[i]);
+            }
+            //TRY02 SUCCESS
+            //TODO: Make TRY02 as a function
+            //ALSO MAKE 'printLine' with checking overflow
 
-                //SECTION2: PRESENTING PROBLEMS
-                if((cursor+(3*pBreak)) >= (doc.internal.pageSize.height-bMargin)){
+            //SECTION2: PRESENTING PROBLEMS
+            if ((cursor + (3 * pBreak)) >= (doc.internal.pageSize.height - bMargin)) {
+                doc.addPage();
+                cursor = 0;
+                cursor += tMargin;
+            } else {
+                cursor += 3 * pBreak;
+            }
+            doc.setFontStyle("bold");
+            doc.text(lMargin, cursor, "PRESENTING PROBLEMS");
+            doc.setFontStyle("normal");
+            var presenting_problems_raw = referral + " is expressing increased concern about " + child_name + "'s " + crying + want_to_die + inter_freq + peer_prob + social_wthrw + frq_tmpr + destruct + defiance + ritualistic + delinquent + anx_nerv_wrr + ngt_trr_slpwk + odd_thk + poor_att + fgts_sit + iapp_sex + ". " + referral + " is also concerned with " + child_name + "'s " + add_conc + ".";
+            var presenting_problems = doc.splitTextToSize(presenting_problems_raw, (pdfInMM - lMargin - rMargin));
+            for (var i = 0; i < presenting_problems.length; i++) {
+                if ((cursor + pBreak) >= (doc.internal.pageSize.height - bMargin)) {
                     doc.addPage();
                     cursor = 0;
                     cursor += tMargin;
-                }else{
-                    cursor += 3*pBreak;
+                } else {
+                    cursor += pBreak;
                 }
-                doc.setFontStyle("bold");
-                doc.text(lMargin, cursor, "PRESENTING PROBLEMS");
-                doc.setFontStyle("normal");
-                var presenting_problems_raw = referral + " is expressing increased concern about " + child_name + "'s " + crying + want_to_die + inter_freq + peer_prob + social_wthrw + frq_tmpr + destruct + defiance + ritualistic + delinquent + anx_nerv_wrr + ngt_trr_slpwk + odd_thk + poor_att + fgts_sit + iapp_sex + ". " + referral + " is also concerned with " + child_name + "'s " + add_conc + ".";
-                var presenting_problems = doc.splitTextToSize(presenting_problems_raw, (pdfInMM-lMargin-rMargin));
-                for(var i = 0; i < presenting_problems.length; i++){
-                    if((cursor+pBreak) >= (doc.internal.pageSize.height-bMargin)){
-                        doc.addPage();
-                        cursor = 0;
-                        cursor += tMargin;
-                    }else{
-                        cursor += pBreak;
-                    }
-                    doc.text(lMargin, cursor, presenting_problems[i]);
-                }
-                //SECTION2 ENDS
-                
-                doc.save(child_name+"Intake Report.pdf");
-            });
+                doc.text(lMargin, cursor, presenting_problems[i]);
+            }
+            //SECTION2 ENDS
 
-        })
-    </script>
+            doc.save(child_name + "Intake Report.pdf");
+        });
+
+    })
+</script>
+
 </html>
